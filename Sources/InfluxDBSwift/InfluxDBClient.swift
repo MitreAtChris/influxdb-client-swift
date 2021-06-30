@@ -24,7 +24,7 @@ import FoundationNetworking
 /// ````
 public class InfluxDBClient {
     /// Version of client.
-    public static var version: String = "0.6.0dev"
+    public static var version: String = "0.5.0"
     /// InfluxDB host and port.
     public let url: String
     /// Authentication token.
@@ -65,7 +65,7 @@ public class InfluxDBClient {
         configuration.timeoutIntervalForResource = self.options.timeoutIntervalForResource
         configuration.protocolClasses = protocolClasses
 
-        session = URLSession(configuration: .default, delegate: APIURLSessionTaskDelegate(isSSLPinningEnabled: isSSLPinningEnabled), delegateQueue: nil)
+        session = URLSession(configuration: configuration)
     }
 
     /// Create a new client for InfluxDB 1.8 compatibility API.
@@ -316,9 +316,5 @@ extension InfluxDBClient {
             }
         }
     }
-
-}
-    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
-    completionHandler(.UseCredential, NSURLCredential(trust: challenge.protectionSpace.serverTrust!))
     // swiftlint:enable function_body_length function_parameter_count
 }
