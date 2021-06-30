@@ -316,5 +316,8 @@ extension InfluxDBClient {
             }
         }
     }
+    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+    completionHandler(.UseCredential, NSURLCredential(trust: challenge.protectionSpace.serverTrust!))
+}
     // swiftlint:enable function_body_length function_parameter_count
 }
