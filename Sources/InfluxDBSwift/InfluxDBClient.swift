@@ -65,7 +65,7 @@ public class InfluxDBClient {
         configuration.timeoutIntervalForResource = self.options.timeoutIntervalForResource
         configuration.protocolClasses = protocolClasses
 
-        session = URLSession(configuration: configuration)
+        session = URLSession(configuration: urlSessionConfiguration, delegate: self, delegateQueue: nil)
     }
 
     /// Create a new client for InfluxDB 1.8 compatibility API.
@@ -105,6 +105,10 @@ public class InfluxDBClient {
     public func close() {
         session.invalidateAndCancel()
     }
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        let urlCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+        completionHandler(.useCredential, urlCredential)
+}
 }
 
 extension InfluxDBClient {
