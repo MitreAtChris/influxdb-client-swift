@@ -65,7 +65,7 @@ public class InfluxDBClient {
         configuration.timeoutIntervalForResource = self.options.timeoutIntervalForResource
         configuration.protocolClasses = protocolClasses
 
-        session = URLSession(configuration: urlSessionConfiguration, delegate: self, delegateQueue: nil)
+        session = URLSession(configuration: URLSessionConfiguration, delegate: self, delegateQueue: nil)
     }
 
     /// Create a new client for InfluxDB 1.8 compatibility API.
