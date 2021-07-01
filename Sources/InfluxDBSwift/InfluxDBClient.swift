@@ -32,7 +32,7 @@ public class InfluxDBClient {
     /// The options to configre client.
     internal let options: InfluxDBOptions
     /// Shared URLSession across the client.
-    public lazy let session: URLSession
+    public lazy var session: URLSession
 
     /// Lazy initialized `QueryAPI`.
     public lazy var queryAPI: QueryAPI = { QueryAPI(client: self) }()
